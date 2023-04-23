@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  webapi:
+    build:
+      context: ../src/TvMazeScraper.API
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__TvMazeDb=Data Source=db;Cache=Shared;Mode=ReadWriteCreate;
+    restart: unless-stopped
+
+  synchronizer:
+    build:
+      context: ../src/TvMazeScraper.Synchronizer
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__TvMazeDb=Data Source=db;Cache=Shared;Mode=ReadWriteCreate;
+    restart: unless-stopped
+
+  db:
+    image: "keinos/sqlite3:3.41.2"
+    command: ["-"]
+    environment:
+      - SQLITE_DATABASE=TvMazeDb
+    volumes:
+      - db-data:/var/lib/sqlite/data
+    restart: unless-stopped
+
+volumes:
+  db-data:
+    name: tv-maze-db
