@@ -1,0 +1,81 @@
+# Build and output directories
+bin/
+obj/
+out/
+publish/
+TestResults/
+Logs/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.nuget.props
+*.nuget.targets
+*.vspscc
+*.vssscc
+.vscode/
+*.vssettings
+*.csproj.vspscc
+
+# Resharper files
+_ReSharper*/
+*.resharper
+*.DotSettings
+
+# Rider files
+.idea/
+*.idea
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Build cache
+.nuget/
+*/packages/
+*.local
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets
+*.obj
+*.pch
+*.dll
+*.exe
+*.user
+*.psess
+*.vsp
+*.vspx
+*.sln.docstates
+*.dotnet_staging/
+*.config
+
+# Others
+[Tt]humbs.db
+*.cache
+ClientApp/node_modules/
+ClientApp/.npm/
+bower_components/
+npm-debug.log
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# Mac files
+.DS_Store
