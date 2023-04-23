@@ -7,7 +7,7 @@ using TvMazeScraper.Synchronizer;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((_, config) => config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true))
-    .UseSerilog((_, _, configuration) => configuration.WriteTo.File(Path.Combine("Logs", "tvMazeSynchronizer-log.txt")))
+    .UseSerilog((_, _, configuration) => configuration.WriteTo.Console())
     .ConfigureServices((hostContext, services) =>
     {
         services.AddAutoMapper(typeof(TvMazeApiDtoMappingProfile));

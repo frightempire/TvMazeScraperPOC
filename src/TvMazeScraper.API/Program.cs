@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-builder.Host.UseSerilog((_, _, configuration) => configuration.WriteTo.File(Path.Combine("Logs", "tvMazeApi-log.txt")));
+builder.Host.UseSerilog((_, _, configuration) => configuration.WriteTo.Console());
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
