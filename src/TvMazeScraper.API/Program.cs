@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TvMazeScraper.API.ViewModels;
 using TvMazeScraper.Infrastructure.Persistence;
@@ -14,10 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(TvMazeApiModelMappingProfile));
-
-builder.Services.AddDbContext<SqLiteTvMazeContext>(
-    options => options.UseSqlite(builder.Configuration.GetConnectionString("SqLiteTvMaze")),
-    ServiceLifetime.Transient);
+builder.Services.AddDbContext<SqLiteTvMazeContext>(ServiceLifetime.Transient);
 
 var app = builder.Build();
 

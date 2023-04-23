@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TvMazeScraper.Domain.Interfaces;
 using TvMazeScraper.Infrastructure.Persistence;
@@ -16,10 +15,7 @@ var host = Host.CreateDefaultBuilder(args)
         var policyProvider = new HttpPolicyProvider();
         services.AddHttpClient("TvMazeClient").AddPolicyHandler(policyProvider.GetHttpPolicies());
         services.AddTransient<ITvMazeService, HttpTvMazeService>();
-
-        services.AddDbContext<SqLiteTvMazeContext>(
-            options => options.UseSqlite(hostContext.Configuration.GetConnectionString("SqLiteTvMaze")), 
-            ServiceLifetime.Transient);
+        services.AddDbContext<SqLiteTvMazeContext>(ServiceLifetime.Transient);
 
         services.AddHostedService<TvMazeSynchronizer>();
     })

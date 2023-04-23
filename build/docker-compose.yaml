@@ -2,29 +2,34 @@ version: '3.9'
 services:
   webapi:
     build:
-      context: ../src/TvMazeScraper.API
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: src/TvMazeScraper.API/Dockerfile
     ports:
       - "8000:80"
     depends_on:
       - db
     environment:
-      - ConnectionStrings__TvMazeDb=Data Source=db;Cache=Shared;Mode=ReadWriteCreate;
+      - ConnectionStrings__TvMazeDb=Data Source=/data/tvmaze.db;Mode=ReadWriteCreate;
     restart: unless-stopped
+    volumes:
+      - db-data:/data
 
   synchronizer:
     build:
-      context: ../src/TvMazeScraper.Synchronizer
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: src/TvMazeScraper.Synchronizer/Dockerfile
     depends_on:
       - db
     environment:
-      - ConnectionStrings__TvMazeDb=Data Source=db;Cache=Shared;Mode=ReadWriteCreate;
+      - ConnectionStrings__TvMazeDb=Data Source=/data/tvmaze.db;Mode=ReadWriteCreate;
     restart: unless-stopped
+    volumes:
+      - db-data:/data
 
   db:
     image: "keinos/sqlite3:3.41.2"
-    command: ["-"]
+    stdin_open: true
+    tty: true
     environment:
       - SQLITE_DATABASE=TvMazeDb
     volumes:
